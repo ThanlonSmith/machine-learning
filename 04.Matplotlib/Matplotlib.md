@@ -350,3 +350,48 @@ plt.show()
 ```
 `绘制的效果图：`
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200115095523604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+
+例 10：在多个坐标系中绘制多个图像
+
+`参考代码：`	
+```py
+# 导入模块
+import matplotlib.pyplot as plt
+import random
+# 准备数据
+x = range(45)
+y_shanghai = [random.uniform(15,20) for i in x]
+y_beijing  = [random.uniform(20,30) for i in x]
+# 创建画布
+fig,axes = plt.subplots(nrows=1,ncols=2,figsize=(16,5),dpi=100)
+# 绘制图像
+axes[0].plot(x,y_shanghai,label = '上海')
+axes[1].plot(x,y_beijing,label='北京',color='r',linestyle='--')
+# 添加x与y轴的刻度
+x_ticks_label = ['12点{}分'.format(i) for i in x] 
+axes[0].set_xticks(x[::5])
+axes[0].set_yticks(x[::5])
+axes[0].set_xticklabels(x_ticks_label[::5])
+axes[1].set_xticks(x[::5])
+axes[1].set_yticks(x[::5])
+axes[1].set_xticklabels(x_ticks_label[::5])
+# 添加网格显示
+axes[0].grid(True,linestyle='--',alpha=0.5)
+axes[1].grid(True,linestyle='--',alpha=0.5)
+# 显示图例
+axes[0].legend(loc=0)
+axes[1].legend(loc=0)
+# 添加描述信息
+axes[0].set_xlabel('时间')
+axes[0].set_ylabel('温度')
+axes[0].set_title('中午12点到13点上海的温度变化图',fontsize = 15)
+axes[1].set_xlabel('时间')
+axes[1].set_ylabel('温度')
+axes[1].set_title('中午12点到13点北京的温度变化图',fontsize = 15)
+# 图像保存
+plt.savefig('/home/thanlon/tmp.png')
+# 显示图像
+plt.show()
+```
+`绘制的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020011521004815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
