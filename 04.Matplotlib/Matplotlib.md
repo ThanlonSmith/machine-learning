@@ -221,3 +221,132 @@ plt.show()
 ```
 `绘制的效果图与例５是一致的，这里查看一下保存的图像：`
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200115012133569.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+
+例７：在一个坐标系中绘制多个图像
+
+`参考代码：`	
+```py
+# 导入模块
+import random
+import  matplotlib.pyplot as plt
+# 数据准备
+x = range(50)
+y = [random.uniform(15,18) for i in x]
+# 绘制画布
+plt.figure(figsize=(8,4),dpi=120)
+# 绘图上海温度的折线图
+plt.plot(x,y)
+# 再增加一条北京的温度的数据
+y_shanghai = [random.uniform(20,30) for i in x]
+# 绘制北京温度的折线图
+plt.plot(x,y_shanghai) # r表示红色，linestyle如果是空字符串，不会显示图像
+# 构造ｘ轴刻度标签
+x_ticks_lable = ['12点{}分'.format(i) for i in x]
+# 构造ｙ轴刻度标签
+y_ticks_lable =  x
+# 修改ｘ,y轴坐标的刻度显示
+plt.xticks(x[::10],x_ticks_lable[::10]) # 坐标的刻度不可以通过字符串刻度进行修改
+plt.yticks(y_ticks_lable[::5])
+plt.grid(True,linestyle = '--',alpha = 0.5) # True表示显示；linestyle表示显示的方式，如这里的虚线；alpha表示图形的透明度
+plt.xlabel('时间',fontsize=10) # 设置x轴描述信息和字体大小
+plt.ylabel('温度',fontsize=10) # 设置y轴描述信息和字体大小
+plt.title('上海市和北京市中午12点到13点之间的温度变化',fontsize=10) # 设置标题轴描述信息和字体大小
+# 保存图像
+# plt.savefig('/home/thanlon/tmp.png') # 保存到指定目录
+# 图像显示
+plt.show()
+```
+`绘制的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200115091814824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+例８：在一个坐标系中绘制多个图像并设置图像风格
+
+`颜色字符`：r表示红色，g表示绿色，b表示蓝色，w表示白色，c表示青色，m表示洋红，y表示黄色，k表示黑色。
+
+`风格`：`-`表示实线，`- -`表示虚线，`-.`表示点划线，`:`表示点虚线，`''`表示留空、空格。
+
+`参考代码：`	
+```py
+# 导入模块
+import random
+import  matplotlib.pyplot as plt
+# 数据准备
+x = range(50)
+y = [random.uniform(15,18) for i in x]
+# 绘制画布
+plt.figure(figsize=(8,4),dpi=120)
+# 绘图上海温度的折线图
+plt.plot(x,y)
+# 再增加一条北京的温度的数据
+y_shanghai = [random.uniform(20,30) for i in x]
+# 绘制北京温度的折线图
+plt.plot(x,y_shanghai,linestyle=':',color='r') # r表示红色，linestyle如果是空字符串，不会显示图像
+# 构造ｘ轴刻度标签
+x_ticks_lable = ['12点{}分'.format(i) for i in x]
+# 构造ｙ轴刻度标签
+y_ticks_lable =  x
+# 修改ｘ,y轴坐标的刻度显示
+plt.xticks(x[::10],x_ticks_lable[::10]) # 坐标的刻度不可以通过字符串刻度进行修改
+plt.yticks(y_ticks_lable[::5])
+plt.grid(True,linestyle = '--',alpha = 0.5) # True表示显示；linestyle表示显示的方式，如这里的虚线；alpha表示图形的透明度
+plt.xlabel('时间',fontsize=10) # 设置x轴描述信息和字体大小
+plt.ylabel('温度',fontsize=10) # 设置y轴描述信息和字体大小
+plt.title('上海市和北京市中午12点到13点之间的温度变化',fontsize=10) # 设置标题轴描述信息和字体大小
+# 保存图像
+# plt.savefig('/home/thanlon/tmp.png') # 保存到指定目录
+# 图像显示
+plt.show()
+```
+`绘制的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020011509191939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+例９：在一个坐标系中绘制多个图像并添加图例
+
+位置的选择：
+| 位置字符串   | 位置代码 |
+| ------------ | -------- |
+| best         | 0        |
+| upper right  | 1        |
+| upter left   | 2        |
+| lower left   | 3        |
+| lower right  | 4        |
+| right        | 5        |
+| center left  | 6        |
+| center right | 7        |
+| lower center | 8        |
+| upper center | 9        |
+| center       | 10       |
+`参考代码：`	
+```py
+# 导入模块
+import random
+import  matplotlib.pyplot as plt
+# 数据准备
+x = range(45)
+y = [random.uniform(15,18) for i in x]
+# 绘制画布
+plt.figure(figsize=(8,4),dpi=120)
+# 绘图上海温度的折线图
+plt.plot(x,y,label='上海')
+# 再增加一条北京的温度的数据
+y_shanghai = [random.uniform(20,30) for i in x]
+# 绘制北京温度的折线图
+plt.plot(x,y_shanghai,linestyle=':',color='r',label='北京') # r表示红色，linestyle如果是空字符串，不会显示图像
+# 构造ｘ轴刻度标签
+x_ticks_lable = ['12点{}分'.format(i) for i in x]
+# 构造ｙ轴刻度标签
+y_ticks_lable =  x
+# 修改ｘ,y轴坐标的刻度显示
+plt.xticks(x[::10],x_ticks_lable[::10]) # 坐标的刻度不可以通过字符串刻度进行修改
+plt.yticks(y_ticks_lable[::5])
+plt.grid(True,linestyle = '--',alpha = 0.5) # True表示显示；linestyle表示显示的方式，如这里的虚线；alpha表示图形的透明度
+plt.xlabel('时间',fontsize=10) # 设置x轴描述信息和字体大小
+plt.ylabel('温度',fontsize=10) # 设置y轴描述信息和字体大小
+plt.title('上海市和北京市中午12点到13点之间的温度变化',fontsize=10) # 设置标题轴描述信息和字体大小
+# 显示图例
+plt.legend(loc='best') # 自动选择最好的位置显示
+# 保存图像
+# plt.savefig('/home/thanlon/tmp.png') # 保存到指定目录
+# 图像显示
+plt.show()
+```
+`绘制的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200115095523604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
