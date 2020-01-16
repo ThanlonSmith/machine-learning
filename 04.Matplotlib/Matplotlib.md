@@ -395,3 +395,98 @@ plt.show()
 ```
 `绘制的效果图：`
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020011521004815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+
+###### 4.3 常见图像的绘制
+Matplotlib能够绘制<font color='red'>**折线图、散点图、柱状图、直方图、饼图**</font>。在选择以何种方式展示数据时，我们需要明确各种统计图的意义。
+
+折线图：以折线的上升或下降来表示统计数量的增减变化的统计图。特点是能够显示数据的变化趋势，反应事物的变化情况。使用的的方法是：`plt.plot(x,y)`。
+
+`参考代码：`
+```py
+# 导入相关模块
+import matplotlib.pyplot as plt
+import random
+# 准备数据
+x = range(9)
+y = [random.randint(0,9) for i in x]
+# 绘制画布
+plt.figure(figsize=(8,4),dpi=100)
+# 添加x，y刻度的显示
+plt.xticks(x[::1])
+plt.yticks(x[::1])
+# 绘制图像
+plt.plot(x,y)
+# 添加网格显示
+plt.grid(True,linestyle='--',alpha=0.5)
+# 图像保存
+plt.savefig('/home/thanlon/tmp.png')
+# 图像显示
+plt.show()
+```
+`折线图的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200116104859812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+散点图：用两组数据构成多个坐标点，考察坐标点的分布，判断了两变量之间是否存在某种关联，以及总结坐标点的分布模式。使用到的方法是：`plt.scatter(x,y)`。
+
+`参考代码：`
+```py
+# 导入相关模块
+import matplotlib.pyplot as plt
+import random
+# 准备数据
+x = range(40)
+y = [random.randint(1,49) for i in x]
+# 绘制画布
+plt.figure(figsize=(10,4),dpi=100)
+# 添加x,y轴刻度的显示
+plt.xticks(x[::1])
+plt.yticks(range(50)[::5])
+# 设置图像的标题
+plt.title('常见图像的之散点图的绘制')
+# 绘制图像
+plt.scatter(x,y)
+# 图像的显示
+plt.show()
+```
+`散点图的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200116123150730.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+柱状图：排列在工作表的列或行中的数据可以绘制到柱状图中，特点是很容易看出数据的大小，适用于统计和对比数据。使用的方法是：`plt.bar(x,width,align='center',**kwargs)`。
+
+`参考代码：`
+```py
+import matplotlib.pyplot as plt
+# 数据的准备
+x_movie_names = ['唐人街探案3', '姜子牙', '囧妈', '中国女排', '紧急救援', '熊出没·狂野大陆', '急先锋', '我在时间尽头等你', '妙先生', '抵达之谜']
+x = range(len(x_movie_names))
+y = [722193, 357767, 246846, 169509, 168038, 93609, 84625, 32234, 29082, 22227]
+# 绘制画布
+plt.figure(figsize = (15, 5), dpi = 100)
+# 绘制图像
+plt.bar(x, y, color = ['b', 'r' , 'g', 'y', 'c', 'm', 'y', 'k', 'c', 'g'], width=0.6)
+# 添加x，y刻度的显示
+# plt.xticks(x[::1], x_movie_names[::1])
+plt.xticks(x, x_movie_names)
+# 设置标题
+plt.title('猫眼电影最受期待榜榜单', fontsize = 15)
+# 添加网格
+plt.grid(True, linestyle='--', alpha=0.5)
+# 图像的显示
+plt.show()
+```
+`柱状图的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200116134901255.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+饼图：用于表示不同分类的占比情况，通过弧度大小来对比各种分类。使用的方法是：`matplotlib.pyplot.pie()`。
+
+`参考代码：`
+```py
+import matplotlib.pyplot as plt
+# 绘制画布
+plt.figure(figsize=(4,4), dpi=100)
+# 绘制图像
+plt.pie([1, 2, 3, 10, 6, 7], labels=['娱乐', '育儿', '饮食', '房贷', '交通', '其它'], colors=['b', 'r' , 'g', 'y', 'c', 'm'], explode=[0, 0, 0, 0.1, 0, 0], autopct='%1.1f%%', shadow=False, startangle=10)
+# 设置标题
+plt.title("2020年2月份家庭支出")
+# 图像显示
+plt.show()
+```
+`饼图的效果图：`
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200116144646651.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
