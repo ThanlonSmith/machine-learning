@@ -262,3 +262,67 @@ a
 ```py
 array([b'I', b'Like', b'qianqian'], dtype='|S8') # S：String；8：数组中最长字符串是8个字母
 ```
+
+###### 5.8 ndarray数组的生成
+从已存在的数组中生成数组的两种方法，`numpy.array`和`numpy.asarray`方法，下面通过一个小案例来区别这两种方法：
+
+`首先创建一个数组作为已存在数组：`
+```py
+import numpy as np
+a = np.array([[1, 2, 3, 4, 5, 6],[7,8,9,10,11,112]])
+a
+```
+```py
+array([[  1,   2,   3,   4,   5,   6],
+       [  7,   8,   9,  10,  11, 112]])
+```
+`使用array在原有数组的基础上生成数组（深度拷贝）：`
+```py
+a1 = np.array(a) # 深拷贝
+a1[0, 0] = 0
+a
+```
+```py
+array([[  1,   2,   3,   4,   5,   6],
+       [  7,   8,   9,  10,  11, 112]])
+```
+`使用asarray在原有数组的基础上生成数组：（浅拷贝）`
+```py
+a2 = np.asanyarray(a) # 浅拷贝
+a2[0, 0] = 0
+a
+```
+```py
+array([[  0,   2,   3,   4,   5,   6],
+       [  7,   8,   9,  10,  11, 112]])
+```
+生成固定范围的数组：
+
+`创建等差数列的数组，指定数量，使用的函数是：linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None,axis=0)`
+```py
+import numpy as np
+arr = np.linspace(0,21,6) # start:0,序列的起始值; stop:20,序列的终止值; num:5, 要生成的等间隔样例数量, 默认是50。endpoint:序列中是否是否包含stop值，默认是True
+arr
+```
+```py
+array([ 0. ,  4.2,  8.4, 12.6, 16.8, 21. ])
+```
+`创建等差数列的数组，指定步长，使用的函数：arange(start=None, *args, **kwargs)`
+```py
+import numpy as np
+arr = np.arange(0, 20, 2, dtype=np.int64) # step:2,步长；dtype:数据类型
+arr
+```
+```py
+array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18])
+```
+`创建等比数列，使用的函数：logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None,axis=0)`
+```py
+import numpy as np
+# 注意这里是生成10的多少次方
+arr = np.logspace(0, 2, 3) # num是要生成等比数列的数量；0、2的意思分别是10的0次方～10的2次方；3：生成3个数
+arr
+```
+```py
+array([  1.,  10., 100.])
+```
