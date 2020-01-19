@@ -326,3 +326,54 @@ arr
 ```py
 array([  1.,  10., 100.])
 ```
+
+创建随机数组（正太分布方式），使用np.random模块创建正太分布有三种方式，分别是：randn(*dn)，normal(loc=0.0, scale=1.0, size=None)，standard_normal(size=None)。
+- randn：从标准动态分布中返回一个或多个样本值。
+- **normal**：返回指定形状的标准正太分布数组。loc：此动态分布的均值(对应着整个分布的中心)；scale：概率分布的标准差，值越大越矮胖，反之越瘦高。size：输出的是shape，默认是None，只输出一个值。
+- standard_normal：返回指定形状的标准正太分布的数组
+
+`生成均值为1.75，标准差为1的100000000个正态分布数据。使用到的函数：normal(loc=0.0, scale=1.0, size=None)`
+
+```py
+# 导入相关模块
+import numpy as np
+import matplotlib.pyplot as plt
+# 数据的准备
+x = np.random.normal(1.75, 1, 100000000) # array是一维数组，也就是一个列表
+# 创建画布
+plt.figure(figsize=(8,4), dpi=100)
+# 绘制图像(绘制直方图)
+plt.hist(x, 1000) # 1000:1000组数据
+# 显示图像
+plt.show()
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200119140455378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+`模拟生成一组股票的涨跌幅数据：随机生成4支股票1周的交易日涨幅数据（随机生成涨跌幅在某个正太分布内，如均值是0，方差是1）：`
+```py
+import numpy as np
+arr = np.random.normal(0, 1, (4,5))
+arr
+```
+```py
+array([[ 1.39648189,  0.17949331, -0.0393186 ,  1.54571909, -0.89729191],
+       [-1.30231063, -0.21940802,  0.43169118, -0.68724142, -1.11523206],
+       [-1.93539031, -2.21212029, -1.39101401, -2.27047266, -0.1254774 ],
+       [ 1.67693295, -2.22111556,  1.5863305 ,  0.69848128,  2.25766984]])
+```
+创建随机数组(均匀分布方式)，使用np.random模块创建正太分布有三种方式，分别是：rand(*dn)，uniform(low=0.0, high=1.0, size=None)，randint(low, high=None, size=None, dtype='l')
+-  rand：返回[0.0,1.0)内的一组均匀分布的数。
+-  **uniform**：从一个均匀分布[low=0.0, hegh=1.0, size=None)中随机采样，low是采用下界，float类型，默认是0；high是采样下界，float类型，默认值是1。size是输出样本的数目，int或元祖类型。如size=(m,n,k)则输出mnk个样本，缺省时输出1个值。返回值：ndarray类型，其形状和参数size中的描述一致。
+- randint：从一个均匀分布中随机采样，生成一个整数或N维整数数组。对于取数范围，如果high不是None时，取[low,high)之间的随机数，否则取值[low,high)之间随机整数。
+```py
+# 导入模块
+import numpy as np
+# 准别数据，生成均匀分布的数据
+x = np.random.uniform(-1, 1, 100000000)
+# 创建画布
+plt.figure(figsize=(8,4), dpi=100)
+# 绘制图像(绘制直方图)
+plt.hist(x, 1000) # 1000:1000组数据
+# 显示图像
+plt.show()
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200119150523323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
