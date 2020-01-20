@@ -377,3 +377,45 @@ plt.hist(x, 1000) # 1000:1000组数据
 plt.show()
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200119150523323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+
+###### 5.9 ndarray数组的索引和切片
+- 一维数组的索引和切片
+```py
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr)
+arr[0]
+```
+```py
+[1 2 3 4]
+1
+```
+- 二维数组的索引和切片
+```py
+import numpy as np
+arr2 = np.array([[1, 2, 3, 4],[5, 6, 7, 8]])
+print(arr2)
+arr2[1,1]
+```
+```py
+[[1 2 3 4]
+ [5 6 7 8]]
+6
+```
+- 三维数组的索引和切片
+```py
+import numpy as np
+arr3 = np.array([[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], [[13, 14, 15, 16], [17, 18, 19, 20], [21, 21, 22, 23]]])
+print(arr3)
+arr3[1, 1, 1]
+```
+```py
+[[[ 1  2  3  4]
+  [ 5  6  7  8]
+  [ 9 10 11 12]]
+
+ [[13 14 15 16]
+  [17 18 19 20]
+  [21 21 22 23]]]
+18
+```
