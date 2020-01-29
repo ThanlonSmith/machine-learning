@@ -574,3 +574,120 @@ arr2
 ```py
 array([ 1,  2,  3,  4,  5,  6,  7,  8, 10, 13, 14, 15, 16, 17, 18])
 ```
+
+###### 5.13 ndarray数组的运算
+- 逻辑运算
+```py
+# 生成10名同学5门课程的分数
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))
+# 取出最后4名同学的成绩，用于逻辑判断
+ret1 = scores[6:, 0:5] # 或者scores[6:, 0:5] 
+# 逻辑判断，如果成绩不小于60分，标记为True，否则为False
+ret2 = ret1 > 60 # 返回的结果是标记后的
+'''
+array([[False,  True,  True,  True,  True],
+       [ True,  True,  True,  True, False],
+       [ True,  True, False,  True,  True],
+       [ True,  True, False,  True,  True]])
+'''
+ret1[ret1 > 60] = 1
+ret1
+'''
+array([[54, 51, 59,  1,  1],
+       [ 1,  1,  1,  1,  1],
+       [ 1,  1, 60,  1,  1],
+       [57,  1,  1,  1,  1]])
+'''
+```
+- 通用判断函数
+
+`numpy.all方法：`
+```py
+'''
+numpy.all方法是：只要有一个不满足条件，就返回False；所有都满足条件，返回True
+判断前两名同学的成绩是否都及格
+'''
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))
+print(scores[0:2, :])
+ret = np.all(scores[0:2, :] > 90)
+ret
+```
+```py
+[[77 81 89 51 66]
+ [78 64 53 53 70]]
+False
+```
+`numpy.any方法：`
+```py
+'''
+numpy.any方法是：只要有一个满足条件，就返回True；所有都不满足条件返回False
+判断前两名同学的成绩是否有不小于90分的
+'''
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))
+print(scores[0:2, :])
+ret = np.any(scores[0:2, :] > 90)
+ret
+```
+```py
+[[82 97 82 79 53]
+ [54 81 91 67 64]]
+True
+```
+- 三元运算符
+
+通过使用numpy.where能够进行更加复杂的运算：
+```py
+# 将前四名学生的前四门课程中成绩中大于60的置为1，否则置为0
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))[:4, :4]
+print(scores)
+np.where(scores > 60, 1, 0)
+```
+```py
+[[76 84 84 52]
+ [52 85 50 90]
+ [57 71 93 92]
+ [90 72 66 67]]
+array([[1, 1, 1, 0],
+       [0, 1, 0, 1],
+       [0, 1, 1, 1],
+       [1, 1, 1, 1]])
+```
+复合逻辑需要结合np.logical_and和np.logical_or使用：
+```py
+# 将前四名学生前四门课程中成绩大于60且小于90的置为1，否知置为0
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))[:4, :4]
+print(scores)
+np.where(np.logical_and(scores > 60, scores < 90), 1, 0)
+```
+```py
+[[61 99 91 92]
+ [78 80 78 56]
+ [63 88 80 59]
+ [84 79 65 86]]
+array([[1, 0, 0, 0],
+       [1, 1, 1, 0],
+       [1, 1, 1, 0],
+       [1, 1, 1, 1]])
+```
+```py
+# 将前四名学生前四门课程中成绩大于90或小于60的置为1，否知置为0
+import numpy as np
+scores = np.random.randint(50, 100, (10, 5))[:4, :4]
+print(scores)
+np.where(np.logical_or(scores > 90, scores < 60), 1, 0)
+```
+```py
+[[76 63 99 78]
+ [84 85 74 56]
+ [72 72 92 61]
+ [56 54 89 60]]
+array([[0, 0, 1, 0],
+       [0, 0, 0, 1],
+       [0, 0, 1, 0],
+       [1, 1, 0, 0]])
+```
