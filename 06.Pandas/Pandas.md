@@ -55,7 +55,152 @@ print(staff.index)
 ```py
 import pandas as pd
 staff = pd.Series(data={'name': 'thanlon', 'age': 24, 'address': '中国上海'})
-print(staff.values)
-print(type(staff.values))
+print(staff.values) # <class 'numpy.ndarray'>
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226191219763.png)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226220033836.png)
+
+**➢ DataFrame结构：**
+
+DataFrame是一个类似于二维数组或表格的对象，既有行索引和列索引。DataFrame的创建：
+```py
+import pandas as pd
+# index：行标签，如果没有传入索引参数，则默认会自动创建一个从0～N的整数索引
+# columns：列标签，如果没有传入索引参数，则默认会自动创建一个从0～N的整数索引
+pd.DataFrame(data=None, index=None, columns=None)
+```
+`例一：`
+```py
+import pandas as pd
+import numpy as np
+pd.DataFrame(data=np.random.randn(2, 3))
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226220012790.png)
+`例二：`
+```py
+# 分别使用numpy和pandas生成学生的成绩表，生成10个同学的6个科目的成绩
+import numpy as np
+score = np.random.randint(0, 100, (10, 6))
+print(score)
+score_df = pd.DataFrame(score)
+score_df
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226215940943.png)
+增加行列索引：
+```py
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+print(score)
+score_df = pd.DataFrame(score)
+print(score_df)
+# 构建行索引序列
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+# 构建列索引序列
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+# 添加行索引
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226215857988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+DataFrame的属性：
+- shape：查看几行几列
+```py
+'''
+查看几行几列
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+print(data.shape)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226221157145.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- index：获取行索引列表
+```py
+'''
+获取行索引列表
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+print(data.index)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226221304861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- columns：获取列索引列表
+```py
+'''
+获取列索引列表
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+print(data.columns)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226221350659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- values：获取数组的值
+```py
+'''
+获取数组的值
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+print(data.values)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226223102602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- T：转置
+```py
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data.T
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226225156343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- head(n)：查看前n行，<font color='red'>**如果不传入n，默认是5行。如果数据没有5行，则默认查看所有行。**</font>
+```py
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data.head(4)
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226225418173.png)
+- tail(n)：查看后n行，<font color='red'>**如果不传入n，默认是5行。如果数据没有5行，则默认查看所有行。**</font>
+```py
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data.tail(2)
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226225603674.png)
