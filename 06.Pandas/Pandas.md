@@ -291,3 +291,66 @@ df = df.set_index(['year', 'month']) # 设置多个索引，要使用列表
 df 
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227092707450.png)
+
+**➢ MultiIndex结构**
+
+MultiIndex是三维的数据结构，即多级索引，也称为层次化的索引。<font color='red'>**层次化索引是pandas的重要功能，可以在Series、DataFrame对象上拥有2个及其以上的索引**</font>。除了通过修改DataFrame数据结构变成MulitiIndex结构，还可以直接创建。
+
+MultiIndex的创建：
+```py
+import pandas as pd
+arrays = [['thanlon', 'kiku', 'kili'], [22, 23, 24]]
+pd.MultiIndex.from_arrays(arrays=arrays, names=('name', 'age'))
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227104914950.png)
+MultiIndex的特性：
+```py
+'''
+index
+'''
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017, 2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index(['year', 'month'])
+df.index
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227105622126.png)
+```py
+'''
+index.names
+'''
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017, 2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index(['year', 'month'])
+df.index.names
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227105702906.png)
+```py
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017, 2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index(['year', 'month'])
+df.index.levels
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227105730475.png)
+```py
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017, 2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index(['year', 'month'])
+df.index.codes
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227105805806.png)
