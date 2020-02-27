@@ -204,3 +204,90 @@ data = pd.DataFrame(data=score,  index=stu, columns=subjects)
 data.tail(2)
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226225603674.png)
+
+DataFrame索引的设置：
+- 修改行列索引值
+```py
+'''
+必须整体全部修改，不能使用索引方式改局部，如data.index[0] = '学生_1'
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+stu1 = ['学生_'+str(i+1) for i in range(score_df.shape[0])]
+data.index = stu1
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200226235552359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- 重设索引
+```py
+'''
+使用reset_index(drop=False)，可以用来设置新的下标索引，drop：默认是False，不删除原来的索引，如果为True，删除原来的索引值
+不删除原来的索引
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data = data.reset_index()
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227000425781.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+```py
+'''
+使用reset_index(drop=False)，可以用来设置新的下标索引，drop：默认是False，不删除原来的索引，如果为True，删除原来的索引值
+删除原来的索引
+'''
+import numpy as np
+import pandas as pd
+score = np.random.randint(60, 100, (9, 6))
+score_df = pd.DataFrame(score)
+subjects = ['语文', '数学', '英语', '历史', '政治', '数学']
+stu = ['学生'+str(i+1) for i in range(score_df.shape[0])]
+data = pd.DataFrame(data=score,  index=stu, columns=subjects)
+data = data.reset_index(drop=True)
+data
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227000436682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+- 以某列值设置为新的索引
+```py
+'''
+设置新的索引：set_index(keys, drop=True)
+keys：列索引名称或列索引名称的列表
+drop：boolean类型，默认是True，当做新的索引，删除原来的列
+以月份设置新的索引
+'''
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017,2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index('month') # 设置单个索引
+df
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227092651430.png)
+```py
+'''
+设置新的索引：set_index(keys, drop=True)
+keys：列索引名称或列索引名称的列表
+drop：boolean类型，默认是True，当做新的索引，删除原来的列
+以年份和月份设置新的索引
+'''
+import pandas as pd
+df = pd.DataFrame({
+    'month': [1, 2, 3, 4],
+    'year': [2017, 2018, 2019, 2020],
+    'sale': [66, 77, 88, 99]
+})
+df = df.set_index(['year', 'month']) # 设置多个索引，要使用列表
+df 
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227092707450.png)
