@@ -354,3 +354,39 @@ df = df.set_index(['year', 'month'])
 df.index.codes
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227105805806.png)
+
+**➢ Panel结构(Panel已被废弃，这里只作了解)**
+
+Panel是MultiIndex的前身，Panel的创建：
+```py
+'''
+pandas.Panel(data-None, items=None, major_axis=None, minor_axis=None)：存储3维数组的Panel结构
+data：ndarray或者DataFrame，表示整体的数据
+items：索引或类似数组的对象，axis=0
+major_axis：索引或类似数组的对象，axis=1
+minor_axis：索引或类似数组的对象，axis=2
+'''
+import pandas as pd
+import numpy as np
+# 24个数，第一个维度是4，第二个维度是3，第三个维度是2，三维
+data = np.arange(24).reshape(4, 3, 2)
+items = list('ABCD')  # ['A', 'B', 'C', 'D']
+major_axis = pd.date_range('20200227', periods=3) # DatetimeIndex(['2020-02-27', '2020-02-28', '2020-02-29'], dtype='datetime64[ns]', freq='D')
+minor_axis = ['first', 'second']
+pd.Panel(data=data, items=items, major_axis=major_axis, minor_axis=minor_axis)
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200227130454778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+Panel数据的查看：
+```py
+ import pandas as pd
+import numpy as np
+# 24个数，第一个维度是4，第二个维度是3，第三个维度是2，三维
+data = np.arange(24).reshape(4, 3, 2)
+items = list('ABCD')  # ['A', 'B', 'C', 'D']
+major_axis = pd.date_range('20200227', periods=3) # DatetimeIndex(['2020-02-27', '2020-02-28', '2020-02-29'], dtype='datetime64[ns]', freq='D')
+minor_axis = ['first', 'second']
+p = pd.Panel(data=data, items=items,
+             major_axis=major_axis, minor_axis=minor_axis)
+p[:, :, 'first']  # :表示取所有
+p['A', :, :]
+```
