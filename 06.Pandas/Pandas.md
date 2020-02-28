@@ -390,3 +390,102 @@ p = pd.Panel(data=data, items=items,
 p[:, :, 'first']  # :表示取所有
 p['A', :, :]
 ```
+
+###### 6.6 Pandas绘图
+**➢ Pandas.Series绘图**
+
+绘制折线图：
+```py
+import pandas as pd
+import numpy as np
+import random
+data = []
+for i in np.arange(0, 100, 10):
+    data.append(random.randint(10, 20))
+s = pd.Series(data=data)
+print(s)
+s.plot(kind='line')  # s.plot.line()，s.plot()函数的参数kind默认是'line'
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228205458917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+绘制柱状图：
+```py
+import pandas as pd
+import numpy as np
+import random
+data = []
+for i in np.arange(0, 100, 10):
+    data.append(random.randint(10, 20))
+s = pd.Series(data=data)
+print(s)
+s.plot(kind='bar')
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020022821033337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+```py
+import pandas as pd
+import numpy as np
+import random
+data = []
+for i in np.arange(0, 100, 10):
+    data.append(random.randint(10, 20))
+s = pd.Series(data=data)
+print(s)
+s.plot(kind='barh')
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228210426563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+绘制直方图：
+```py
+import pandas as pd
+import numpy as np
+import random
+data = []
+for i in np.arange(0, 100, 10):
+    data.append(random.randint(10, 20))
+data = np.random.normal(1.75, 1, 10000) 
+s = pd.Series(data=data)
+print(s)
+s.plot(kind='hist')
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228213939462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+**➢ Pandas.DataFrame绘图**
+
+绘制折线图：
+```py
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 2)  # 从标准动态分布中返回一个或多个样本值
+print(data)
+df = pd.DataFrame(data=data)
+print(df)
+df.plot(kind='line')  # df.plot()函数的参数kind默认是'line'
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228201352644.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+绘制柱状图：
+```py
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 3)  # 从标准动态分布中返回一个或多个样本值
+print(data)
+df = pd.DataFrame(data=data)
+print(df)
+df.plot(kind='bar')  # df.plot.line()，df.plot()函数的参数kind默认是'line'
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228212151840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+```py
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 3)  # 从标准动态分布中返回一个或多个样本值
+df = pd.DataFrame(data=data)
+df.plot(kind='barh')  # df.plot()函数的参数kind默认是'line'
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228212400359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
+绘制直方图：
+```py
+import pandas as pd
+import numpy as np
+data = np.random.randn(10, 3)  # 从标准动态分布中返回一个或多个样本值
+print(data)
+df = pd.DataFrame(data=data)
+print(df)
+df.plot(kind='hist')  # df.plot()函数的参数kind默认是'line'
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200228215053951.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1RoYW5sb24=,size_16,color_FFFFFF,t_70)
